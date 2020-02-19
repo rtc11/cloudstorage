@@ -9,9 +9,11 @@ jobs:
     name: Deploy to gcp
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repo fagkveld-feb-2020
+      uses: actions/checkout@master
     - uses: actions-hub/gcloud@master
       env:
-        PROJECT_ID: ringed-subject-268309
+        PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         CLI: gsutil
       with:
