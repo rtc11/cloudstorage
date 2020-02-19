@@ -1,5 +1,5 @@
 
-name: Build and Deploy
+name: Deploy to GCP
 
 on:
   push:
