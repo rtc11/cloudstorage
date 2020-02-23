@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@master
       - shell: bash
         run: |
-          ${{ github.event.client_payload }} > dispatched.txt
+           'echo ${{ github.event.client_payload }}' > dispatched.txt
       - uses: actions-hub/gcloud@master
         name: Deploy to GCP
         env:
