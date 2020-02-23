@@ -13,8 +13,9 @@ jobs:
       uses: actions/checkout@master
     - uses: actions-hub/gcloud@master
       env:
+        TEST: "whatsup"
         PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         CLI: gsutil
       with:
-        args: cp index.html gs://bucket_fagkveld
+        args: cp $TEST gs://bucket_fagkveld
