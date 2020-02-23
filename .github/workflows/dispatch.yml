@@ -12,8 +12,10 @@ jobs:
       - name: Checkout repo fagkveld-feb-2020
         uses: actions/checkout@master
       - shell: bash
+        env:
+          LOAD: ${{ github.event.client_payload }}
         run: |
-           'echo "${{ github.event.client_payload }}"' > dispatched.txt
+           echo "Payload: $LOAD" > dispatched.txt
       - uses: actions-hub/gcloud@master
         name: Deploy to GCP
         env:
