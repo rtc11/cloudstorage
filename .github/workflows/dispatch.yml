@@ -1,0 +1,23 @@
+name: Deploy event
+
+on:
+  repository_dispatch:
+    types: deploy
+
+jobs:
+  deploy:
+    name: Deploy to gcp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo fagkveld-feb-2020
+        uses: actions/checkout@master
+      - uses: actions-hub/gcloud@master
+        name: Dispatcher Event
+        if: github.event.action == 'deploy'
+        env:
+          PAYLOAD: ${{ github.event.client_payload }}
+          PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLI: gsutil
+        with:
+          args: cp index.html gs://bucket_fagkveld
