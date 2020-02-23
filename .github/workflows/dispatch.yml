@@ -15,7 +15,7 @@ jobs:
         env:
           LOAD: ${{ github.event.client_payload }}
         run: |
-           echo ${{ env.LOAD }} > dispatched.txt
+           echo $LOAD >> dispatched.txt
       - uses: actions-hub/gcloud@master
         name: Deploy to GCP
         env:
