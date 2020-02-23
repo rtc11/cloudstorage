@@ -11,13 +11,15 @@ jobs:
     steps:
       - name: Checkout repo fagkveld-feb-2020
         uses: actions/checkout@master
-      - uses: actions-hub/gcloud@master
-        name: Dispatcher Event
-        if: github.event.action == 'deploy'
+      - name: Dispatcher Event
         env:
           PAYLOAD: ${{ github.event.client_payload }}
+        run: echo $PAYLOAD >> payload.txt
+      - uses: actions-hub/gcloud@master
+        name: Dispatcher Event
+        env:
           PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: cp index.html gs://bucket_fagkveld
+          args: cp payload.txt gs://bucket_fagkveld
