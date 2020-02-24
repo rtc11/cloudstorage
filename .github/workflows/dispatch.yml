@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@master
       - shell: bash
         env:
-          LOAD: ${{ github.event.client_payload }}
+          LOAD: ${{ github.event.client_payload.text }}
         run: |
            echo $LOAD >> dispatched.txt
       - uses: actions-hub/gcloud@master
